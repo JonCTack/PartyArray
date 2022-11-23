@@ -27,14 +27,14 @@ let party = [
         }
     },
 ];
-
+//Prompt 1: double the hitpoints of everyone in the party
 const doubleHP = () =>{
     party.forEach((el =>{
         el.hitpoints = el.hitpoints*2
     }))
 };
 doubleHP();
-
+//Prompt 2: Timothy has been hit with an arrow, subtract 5 points from his hp
 const damageHP = (name, dmg) => {
     party.forEach((el =>{
         if(el.name == name){
@@ -43,6 +43,7 @@ const damageHP = (name, dmg) => {
     }))
 };
 damageHP("Timothy", 5);
+//Prompt 2: Timothy has been hit with an arrow, subtract 5 points from his hp
 const polyPet = (name, newPet) => {
     party.forEach((el =>{
         if(el.name == name){
@@ -51,6 +52,7 @@ const polyPet = (name, newPet) => {
     }))
 };
 polyPet("Sarah", "jellyfish");
+//Prompt 4: Timothy drank this potion. Raise his hitpoints by 20 and remove "potion" from his belongings.
 const drinkPotion = (name) => {
     party.forEach((el =>{
         if(el.name == name && el.belongings.includes("potion")){
@@ -64,7 +66,7 @@ const drinkPotion = (name) => {
     ))
 };
 drinkPotion("Timothy")
-
+//Prompt 5: Timothy got hungry and stole Joline's bread. Take it out of her belongings and put it  into Timothy's belongings.
 const stealObj = (nameThief, nameVic, item) => {
     let stealSuc = undefined
     party.forEach((el =>{
@@ -86,8 +88,59 @@ const stealObj = (nameThief, nameVic, item) => {
 };
 
 stealObj("Timothy","Joline","bread")
-
+//Prompt 6: Joline got upset and left the party. Take her out of the array. (leaving member is parameter)
 const leaveParty = (name) => {
    party = party.filter(member=> member.name!== name) 
     };
 leaveParty("Joline")
+//Prompt 7: Timothy and Sarah have been recruiting. Add a new adventurer to the party. (new adventurer is parameter)
+const recruitNew = (obj) => {
+    party.push(obj)
+}
+let newMemb = {
+    name: 'Tim',
+    hitpoints: 15,
+    belongings: [ 'staff', 'book', 'tea' ],
+    adventureTime: 'new',
+    companion: { name: 'Jeremy', type: 'Rat' }
+  }
+recruitNew(newMemb)
+
+// Prompt 8: The party has been doing well! They found 200 gold. Create a new property called gold and split the gold evenly between everyone. (amount of gold is parameter)
+
+const findGold = (gold) => {
+    let goldCut =( gold / party.length);
+    goldCut = Math.floor(goldCut);
+    party.forEach((el =>{
+        el.goldAmount = goldCut}
+    
+    
+    ));
+
+}
+
+findGold(200)
+// Prompt 9: Sarah is tired of taking care of a jellyfish. Subtract some gold from her and change her companion to a bear. 
+
+party[1].goldAmount = party[1].goldAmount - 10
+party[1].companion.type = "Bear"
+
+
+// Prompt 10: Timothy’s sword has gotten old. Change it to “Rusty Sword" 
+
+party[0].belongings[1] = "Rusty Sword"
+console.log(party)
+// Prompt 11: Write a function called setLeader that takes a name as a parameter. The member with that name should have a new property leader: true while the other members have leader: false.
+
+const setLeader = (name) => {
+    party.forEach((el =>{
+       if(el.name == name){
+        el.leader = true
+       } else {
+        el.leader = false
+       }
+    }));
+    }
+
+setLeader("Sarah")
+console.log(party)
